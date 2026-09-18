@@ -187,18 +187,18 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
         </tr>
         <tr>
           <td>Profiles — high-water mark</td>
-          <td><span class="status s-none"><span class="dot"></span>Not tracked</span></td>
-          <td class="note">No feed. 39M/month, $0.92 CPM. Check in Iterable.</td>
+          <td><span class="status s-warn"><span class="dot"></span>Watch</span></td>
+          <td class="note">34.25M of 39M — 87.8%. Reaches ~97% by contract end at current growth.</td>
         </tr>
         <tr>
           <td>Custom events</td>
-          <td><span class="status s-none"><span class="dot"></span>Not tracked</span></td>
-          <td class="note">No feed. 40M/month, $0.01 CPM.</td>
+          <td><span class="status s-good"><span class="dot"></span>Fine</span></td>
+          <td class="note">26.28M of 40M — 65.7%.</td>
         </tr>
         <tr>
           <td>Embedded messaging</td>
           <td><span class="status s-none"><span class="dot"></span>Not tracked</span></td>
-          <td class="note">No feed. 39M profiles/month, $0.25 CPM.</td>
+          <td class="note">No separate figure. 39M profiles/month, $0.25 CPM — likely tracks profiles.</td>
         </tr>
         <tr>
           <td>WhatsApp — PAYG North America</td>
@@ -289,28 +289,43 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
 <!-- WEEKLY -->
 <section class="sec">
   <h2>Weekly sends and open rate</h2>
-  <p class="sec-note">Iterable only. Filtered opens strip bot and proxy opens. w/c 14 Sep is 4 of 7 days.</p>
-  <div class="grid g2">
-    <div class="card">
-      <div style="font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:8px">Sends per week</div>
-      <svg class="chart" id="wk-sends" viewBox="0 0 440 190" role="img"
-           aria-label="Weekly Iterable email sends, mid June to 17 September 2026"></svg>
+  <p class="sec-note">Iterable only. w/c 14 Sep is 4 of 7 days. The gap between the two open lines is the machine and proxy layer.</p>
+  <div class="card">
+    <div style="font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:8px">Sends per week</div>
+    <svg class="chart" id="wk-sends" viewBox="0 0 900 210" role="img"
+         aria-label="Weekly Iterable email sends, mid June to 17 September 2026"></svg>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px">
+      <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Open rate — all recorded opens vs filtered (human) opens</div>
+      <div style="display:flex;gap:14px;font-size:12px;color:var(--ink-2)">
+        <span style="display:inline-flex;align-items:center;gap:6px">
+          <span style="width:14px;height:3px;border-radius:2px;background:#eb6834;display:inline-block"></span>All opens</span>
+        <span style="display:inline-flex;align-items:center;gap:6px">
+          <span style="width:14px;height:3px;border-radius:2px;background:#2a78d6;display:inline-block"></span>Filtered (human)</span>
+      </div>
     </div>
-    <div class="card">
-      <div style="font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:8px">Filtered open rate</div>
-      <svg class="chart" id="wk-or" viewBox="0 0 440 190" role="img"
-           aria-label="Weekly filtered open rate, mid June to 17 September 2026, falling from about 6 percent to about 4 percent"></svg>
-    </div>
+    <svg class="chart" id="wk-or" viewBox="0 0 900 290" role="img"
+         aria-label="Weekly open rate: all recorded opens fall from about 27 percent to about 5 percent from mid August, converging on the filtered human open rate which falls only from about 6 percent to about 4 percent"></svg>
+  </div>
+  <div class="callout crit">
+    <h3>Machine opens stopped being recorded entirely on 17 August</h3>
+    <p>Through 3 August, Iterable recorded about <b>4.4 all-opens for every filtered human
+       open</b> — roughly 3.5M machine and proxy opens a week. From w/c 17 August the two
+       series are identical: 71 machine opens that week, 35 the next, 389 last week.</p>
+    <p><b>So this is a decline in recorded opens, not in human engagement.</b> The filtered
+       line barely moved — 5.98% to 4.06%, and part of that is a partial week. The
+       all-opens line fell from 26.33% to 4.06% because an entire layer of the data vanished.</p>
+    <p>That pins the fault squarely on Iterable's open pipeline and rules out deliverability:
+       a delivery problem would move bounces and the filtered line together, and bounce rates
+       are flat. <b>It also means any pre-17-August open comparison is invalid</b> — the
+       metric changed definition mid-series.</p>
   </div>
   <div class="callout">
-    <h3>Opens are still understated — but Iterable has started backfilling</h3>
-    <p>Open rate is 4.06% on the partial week, down from 6.37% in early July. The cause is
-       unchanged: Iterable is not counting machine and bot opens correctly.</p>
-    <p>Two weeks were revised upward since last Sunday's run — w/c 7 Sep from 696,530 to
-       733,590 filtered opens (+5.3%), w/c 31 Aug +0.6%. That is consistent with the
-       promised backdating starting to land.</p>
-    <p><b>Don't benchmark campaigns on this period.</b> Expect these numbers to keep moving.
-       Re-baseline once four clean weeks are on the board.</p>
+    <h3>Backfilling has started</h3>
+    <p>Two weeks were revised upward since Sunday's run — w/c 7 Sep from 696,530 to 733,590
+       filtered opens (+5.3%), w/c 31 Aug +0.6%. Consistent with the promised backdating
+       beginning to land. Expect these figures to keep moving.</p>
   </div>
 </section>
 
@@ -405,22 +420,71 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
   </div>
 </section>
 
+<!-- PROFILES & EVENTS -->
+<section class="sec">
+  <h2>Profiles and custom events</h2>
+  <p class="sec-note">From the Iterable billing usage page, 15 Aug – 17 Sep. These reset monthly,
+     so a spike can't be offset by a quiet month.</p>
+  <div class="grid g2">
+    <div class="card">
+      <div class="cardhead">
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Profiles — high-water mark</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">34,246,083</div>
+        </div>
+        <span class="status s-warn"><span class="dot"></span>Watch</span>
+      </div>
+      <div class="meter is-warn"><i style="width:87.8%"></i></div>
+      <div class="pct">87.8% of 39,000,000 · 4.75M headroom</div>
+      <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">
+        368,493 added in 34 days — 10,838/day. At that rate the count reaches
+        <b>~37.8M (97%) by 14 Aug 2027</b> and crosses 39M around November 2027,
+        just past contract end.
+      </p>
+    </div>
+    <div class="card">
+      <div class="cardhead">
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Custom events — high-water mark</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">26,281,018</div>
+        </div>
+        <span class="status s-good"><span class="dot"></span>Fine</span>
+      </div>
+      <div class="meter is-good"><i style="width:65.7%"></i></div>
+      <div class="pct">65.7% of 40,000,000 · 13.7M headroom</div>
+      <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">
+        26,220,498 events stored as of 17 Sep — effectively flat against the high-water
+        mark. No action needed.
+      </p>
+    </div>
+  </div>
+  <div class="callout">
+    <h3>Profiles clear the year, but there is no room for a bulk import</h3>
+    <p>Total users equals the high-water mark exactly (34,246,083), so the count only ever
+       ratchets up — suppressing or unsubscribing a profile doesn't reduce it. Only deletion does.</p>
+    <p>4.75M of headroom sounds comfortable, but it is 15 months of organic growth. A single
+       list import or a migration that creates duplicate profiles would eat it in one day —
+       and the high-water basis means that day sets the whole month's bill at $0.92 CPM.</p>
+    <p><b>Relevant to the two-project decision:</b> the contract defines a profile as any email
+       address residing in the Iterable account. A second project that duplicates profiles
+       would count them twice against this same 39M ceiling.</p>
+  </div>
+</section>
+
 <!-- GAPS -->
 <section class="sec">
   <h2>Not tracked here</h2>
-  <p class="sec-note">No data feed reaches these. Check in Iterable directly.</p>
+  <p class="sec-note">No figure available for these.</p>
   <div class="card">
     <ul class="gaps">
-      <li><b>Profile high-water mark</b> — 39M/month, $0.92 CPM. Daily high-water basis: one spike sets the month.</li>
-      <li><b>Custom events</b> — 40M/month, $0.01 CPM.</li>
-      <li><b>Embedded messaging</b> — 39M profiles/month, $0.25 CPM.</li>
+      <li><b>Embedded messaging</b> — 39M profiles/month, $0.25 CPM. Not broken out separately on the usage page; likely tracks the profile count above.</li>
       <li><b>Sandbox usage</b> — counts against production allowances, so every figure here understates the bill.</li>
     </ul>
   </div>
 </section>
 
 <footer>
-  <p><b>Sources.</b> Tableau — 🗂️ Email - Country-Date-Domain-Campaign
+  <p><b>Sources.</b> Iterable billing usage page (profiles, custom events, 15 Aug – 17 Sep). Tableau — 🗂️ Email - Country-Date-Domain-Campaign
      (<code>db6fb249-933c-4d97-85da-4869afd5e69b</code>), filtered <code>Email Source = Iterable</code>;
      🗂️ CRM - Push-SMS-Whatsapp Reporting (<code>6a536c4f-a5b3-4f40-882d-ef85acc470c5</code>),
      filtered <code>Attribution Mode = any_7d_post_send</code>. Allowances from order forms
@@ -493,16 +557,16 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
   })();
 
   var weeks = [
-    ["15 Jun",17022027,1024236],["22 Jun",17059832,1033984],["29 Jun",17611069,1089949],
-    ["6 Jul",19520707,1242585],["13 Jul",17085788,1087058],["20 Jul",19412140,1151544],
-    ["27 Jul",16695209,1006476],["3 Aug",16567940,991272],["10 Aug",16277491,838843],
-    ["17 Aug",16159055,762924],["24 Aug",11671501,536058],["31 Aug",12700552,672559],
-    ["7 Sep",14113515,733590],["14 Sep",14093834,571544]
+    ["15 Jun",17022027,1024236,4480932],["22 Jun",17059832,1033984,4540108],["29 Jun",17611069,1089949,4751749],
+    ["6 Jul",19520707,1242585,5442814],["13 Jul",17085788,1087058,4622148],["20 Jul",19412140,1151544,5202732],
+    ["27 Jul",16695209,1006476,4492890],["3 Aug",16567940,991272,4362680],["10 Aug",16277491,838843,1826091],
+    ["17 Aug",16159055,762924,762995],["24 Aug",11671501,536058,536093],["31 Aug",12700552,672559,672860],
+    ["7 Sep",14113515,733590,734014],["14 Sep",14093834,571544,571933]
   ];
 
   (function(){
     var svg = document.getElementById("wk-sends");
-    var W=440,H=190,L=44,R=10,T=12,B=36;
+    var W=900,H=210,L=52,R=14,T=14,B=38;
     var iw=W-L-R, ih=H-T-B, max=22e6;
     var y=function(v){ return T+ih-(v/max)*ih; };
     [0,10e6,20e6].forEach(function(v){
@@ -519,35 +583,65 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
       });
       rect.addEventListener("mouseleave",hideTip);
       svg.appendChild(rect);
-      if(i%3===0||i===weeks.length-1)
-        svg.appendChild(el("text",{x:x+w/2,y:H-B+15,class:"tick","text-anchor":"middle"},d[0]));
+      svg.appendChild(el("text",{x:x+w/2,y:H-B+15,class:"tick","text-anchor":"middle"},d[0]));
     });
     svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(0),y2:y(0),class:"baseline"}));
   })();
 
   (function(){
     var svg = document.getElementById("wk-or");
-    var W=440,H=190,L=44,R=10,T=12,B=36;
-    var iw=W-L-R, ih=H-T-B, max=0.08;
+    var W=900,H=290,L=52,R=14,T=18,B=40;
+    var iw=W-L-R, ih=H-T-B, max=0.30;
     var y=function(v){ return T+ih-(v/max)*ih; };
     var x=function(i){ return L + (iw/(weeks.length-1))*i; };
-    [0,0.02,0.04,0.06,0.08].forEach(function(v){
+    [0,0.05,0.10,0.15,0.20,0.25,0.30].forEach(function(v){
       svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),class:"gridline"}));
       svg.appendChild(el("text",{x:L-7,y:y(v)+3.5,class:"tick","text-anchor":"end"},(v*100).toFixed(0)+"%"));
     });
-    var pts = weeks.map(function(d,i){ return [x(i), y(d[2]/d[1]), d]; });
-    svg.appendChild(el("path",{d:"M"+pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join("L"),class:"line-mark"}));
-    pts.forEach(function(p,i){
-      var c=el("circle",{cx:p[0],cy:p[1],r:4.5,class:"dot-mark"});
-      var hit=el("circle",{cx:p[0],cy:p[1],r:13,fill:"transparent"});
-      hit.addEventListener("mousemove",function(e){
-        var d=p[2];
-        showTip(e,"<b>w/c "+d[0]+"</b>"+(d[2]/d[1]*100).toFixed(2)+"% filtered OR<br>"+fmt(d[2])+" opens / "+fmt(d[1])+" sends"+(i===pts.length-1?"<br><i>partial — 4 of 7 days</i>":""));
+
+    // the machine-open layer: shaded gap between the two series
+    var top = weeks.map(function(d,i){ return [x(i), y(d[3]/d[1])]; });
+    var bot = weeks.map(function(d,i){ return [x(i), y(d[2]/d[1])]; });
+    var area = "M"+top.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join("L")
+             + "L"+bot.slice().reverse().map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join("L")+"Z";
+    svg.appendChild(el("path",{d:area,fill:"#eb6834","fill-opacity":"0.10",stroke:"none"}));
+
+    function series(key, color, label){
+      var pts = weeks.map(function(d,i){ return [x(i), y(d[key]/d[1]), d]; });
+      svg.appendChild(el("path",{d:"M"+pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join("L"),
+                                 fill:"none",stroke:color,"stroke-width":2,"stroke-linejoin":"round","stroke-linecap":"round"}));
+      pts.forEach(function(p,i){
+        svg.appendChild(el("circle",{cx:p[0],cy:p[1],r:4,fill:color,stroke:"var(--surface)","stroke-width":2}));
+        var hit=el("circle",{cx:p[0],cy:p[1],r:14,fill:"transparent"});
+        hit.addEventListener("mousemove",function(e){
+          var d=p[2], machine=d[3]-d[2];
+          showTip(e,"<b>w/c "+d[0]+"</b>"
+            +"All opens "+(d[3]/d[1]*100).toFixed(2)+"%<br>"
+            +"Filtered "+(d[2]/d[1]*100).toFixed(2)+"%<br>"
+            +"Machine/proxy "+fmt(machine)+(machine>1000?" ("+(d[3]/d[2]).toFixed(2)+"× filtered)":" — collapsed")
+            +(i===pts.length-1?"<br><i>partial — 4 of 7 days</i>":""));
+        });
+        hit.addEventListener("mouseleave",hideTip);
+        svg.appendChild(hit);
       });
-      hit.addEventListener("mouseleave",hideTip);
-      svg.appendChild(c); svg.appendChild(hit);
-      if(i%3===0||i===pts.length-1)
-        svg.appendChild(el("text",{x:p[0],y:H-B+15,class:"tick","text-anchor":"middle"},p[2][0]));
+      return pts;
+    }
+    series(3,"#eb6834","All opens");
+    var fp = series(2,"#2a78d6","Filtered");
+
+    // direct labels
+    svg.appendChild(el("text",{x:x(0)+6,y:y(weeks[0][3]/weeks[0][1])-9,fill:"#eb6834",
+                               "font-size":"11","font-weight":"700"},"All opens"));
+    svg.appendChild(el("text",{x:x(0)+6,y:y(weeks[0][2]/weeks[0][1])-9,fill:"#2a78d6",
+                               "font-size":"11","font-weight":"700"},"Filtered (human)"));
+
+    // marker for the break
+    var bx = x(9);
+    svg.appendChild(el("line",{x1:bx,x2:bx,y1:T,y2:T+ih,stroke:"#898781","stroke-width":1,"stroke-dasharray":"3 3"}));
+    svg.appendChild(el("text",{x:bx+6,y:T+12,fill:"#898781","font-size":"10","font-weight":"700"},"17 Aug — machine opens stop"));
+
+    weeks.forEach(function(d,i){
+      svg.appendChild(el("text",{x:x(i),y:H-B+16,class:"tick","text-anchor":"middle"},d[0]));
     });
     svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(0),y2:y(0),class:"baseline"}));
   })();
