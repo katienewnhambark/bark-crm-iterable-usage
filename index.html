@@ -21,7 +21,7 @@
 body{margin:0;background:var(--plane);color:var(--ink);font-family:var(--font);
      font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1080px;margin:0 auto;padding-block:32px;padding-left:20px;padding-right:20px}
-header{margin-bottom:24px}
+header{margin-bottom:20px}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
          color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--series)}
@@ -43,13 +43,17 @@ h2{font-size:17px;font-weight:700;margin:0 0 4px;letter-spacing:-0.005em}
 .tile .label{font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
 .tile .val{font-size:26px;font-weight:700;letter-spacing:-0.02em;line-height:1.1}
 .tile .unit{font-size:13px;font-weight:500;color:var(--muted);margin-top:3px}
-.meter{height:8px;border-radius:4px;background:var(--grid);margin-top:12px;overflow:hidden}
-.meter > i{display:block;height:100%;border-radius:4px;background:var(--series)}
+.meter{height:10px;border-radius:5px;background:var(--grid);margin-top:12px;position:relative}
+.meter > i{display:block;height:100%;border-radius:5px;background:var(--series)}
 .meter.is-good > i{background:var(--good)}
 .meter.is-warn > i{background:var(--warning)}
 .meter.is-crit > i{background:var(--critical)}
 .meter.is-mute > i{background:var(--muted)}
+.meter > b{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);
+           border-radius:1px;box-shadow:0 0 0 2px var(--surface)}
 .pct{font-size:12px;color:var(--ink-2);margin-top:7px;font-variant-numeric:tabular-nums}
+.pace{font-size:12px;color:var(--ink-2);margin-top:5px;font-variant-numeric:tabular-nums}
+.pace b{font-weight:700}
 
 .status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
         padding:3px 9px;border-radius:999px;border:1px solid var(--ring);white-space:nowrap}
@@ -75,6 +79,7 @@ th:first-child,td:first-child{text-align:left;font-variant-numeric:normal}
 td.note{text-align:left;font-variant-numeric:normal;color:var(--ink-2);font-size:13px}
 tbody tr:last-child td{border-bottom:none}
 tr.total td{font-weight:700;border-top:1px solid var(--axis)}
+tr.here td{background:#fff8e6}
 .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
 .chart{width:100%;height:auto;display:block;overflow:visible}
@@ -102,6 +107,7 @@ tr.total td{font-weight:700;border-top:1px solid var(--axis)}
 .callout h3{margin:0 0 5px;font-size:14px;font-weight:700}
 .callout p{margin:0;font-size:13.5px;color:var(--ink-2)}
 .callout p + p{margin-top:7px}
+.lede{font-size:15px;color:var(--ink);font-weight:500}
 
 .gaps li{margin-bottom:7px;font-size:13.5px;color:var(--ink-2)}
 .gaps li b{color:var(--ink)}
@@ -120,15 +126,18 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
 <header>
   <div class="eyebrow">CRM Overview · Weekly</div>
   <h1>Iterable usage against contracted allowances</h1>
-  <p class="sub">Snapshot 28 Sep 2026 · Data to 27 Sep 2026 · Contract year 15 Aug 2026 – 14 Aug 2027, day 44 of 365</p>
+  <p class="sub">Snapshot 2 Oct 2026 · Data to 1 Oct 2026 · Contract year 15 Aug 2026 – 14 Aug 2027, day 48 of 365</p>
 </header>
 
 <!-- HOW TO READ -->
 <div class="card" style="margin-bottom:18px;border-left:3px solid var(--series)">
   <div style="font-size:13.5px;color:var(--ink-2)">
-    <span class="tag t-act">Actual</span> = sent, measured, already counted against the allowance.
-    <span class="tag t-proj" style="margin-left:10px">Projected</span> = an estimate of where the
-    full contract year lands if current rates hold. Every figure below carries one of these two labels.
+    <p style="margin:0 0 7px"><span class="tag t-act">Actual</span> = sent, measured, already counted
+      against the allowance. <span class="tag t-proj" style="margin-left:6px">Projected</span> = an
+      estimate of where the full year lands if current rates hold.</p>
+    <p style="margin:0"><b>On-pace %</b> is where a channel would be today to finish the year at 95% of
+      allowance. <b>Pace</b> is actual ÷ on-pace, so 1.00 is exactly on plan. The black tick on each
+      meter marks on-pace.</p>
   </div>
 </div>
 
@@ -136,124 +145,102 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
 <div class="grid g4">
   <div class="card tile">
     <div class="label">Email sends <span class="tag t-act">Actual</span></div>
-    <div class="val">86.4M</div>
-    <div class="unit">sent of 782M, 15 Aug – 27 Sep</div>
-    <div class="meter is-good"><i style="width:11.1%"></i></div>
-    <div class="pct">11.1% of the year's allowance used</div>
+    <div class="val">100.7M</div>
+    <div class="unit">sent of 782M, 15 Aug – 1 Oct</div>
+    <div class="meter is-good"><i style="width:12.87%"></i><b style="left:12.49%"></b></div>
+    <div class="pct">12.87% used · on-pace 12.49%</div>
+    <div class="pace">Pace <b>1.03</b> — on track</div>
     <div class="pct" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--grid)">
-      <span class="tag t-proj">Projected</span> 823M full year — 105.3%
+      <span class="tag t-proj">Projected</span> 796.5M full year — 101.9%
     </div>
   </div>
   <div class="card tile">
     <div class="label">WhatsApp UK <span class="tag t-act">Actual</span></div>
-    <div class="val">87,938</div>
-    <div class="unit">sent of 1.22M, 15 Aug – 27 Sep</div>
-    <div class="meter is-good"><i style="width:7.2%"></i></div>
-    <div class="pct">7.2% of the year's allowance used</div>
+    <div class="val">100,315</div>
+    <div class="unit">sent of 1.22M, 15 Aug – 1 Oct</div>
+    <div class="meter is-warn"><i style="width:8.22%"></i><b style="left:12.49%"></b></div>
+    <div class="pct">8.22% used · on-pace 12.49%</div>
+    <div class="pace">Pace <b>0.66</b> — behind</div>
     <div class="pct" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--grid)">
-      <span class="tag t-proj">Projected</span> 729K full year — 59.8%
+      <span class="tag t-proj">Projected</span> 762.8K full year — 62.5%
     </div>
   </div>
   <div class="card tile">
     <div class="label">Push <span class="tag t-act">Actual</span></div>
-    <div class="val">692,523</div>
-    <div class="unit">sent of 250M, 15 Aug – 27 Sep</div>
-    <div class="meter is-good"><i style="width:0.3%"></i></div>
-    <div class="pct">0.3% of the year's allowance used</div>
+    <div class="val">770,439</div>
+    <div class="unit">sent of 250M, 15 Aug – 1 Oct</div>
+    <div class="meter is-crit"><i style="width:0.31%"></i><b style="left:12.49%"></b></div>
+    <div class="pct">0.31% used · on-pace 12.49%</div>
+    <div class="pace">Pace <b>0.02</b> — behind</div>
     <div class="pct" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--grid)">
-      <span class="tag t-proj">Projected</span> 5.7M full year — 2.3%
+      <span class="tag t-proj">Projected</span> 5.9M full year — 2.3%
     </div>
   </div>
   <div class="card tile">
     <div class="label">Filtered open rate <span class="tag t-act">Actual</span></div>
-    <div class="val">4.70%</div>
-    <div class="unit">w/c 21 Sep, complete week</div>
+    <div class="val">4.01%</div>
+    <div class="unit">w/c 28 Sep, complete week</div>
     <div style="margin-top:14px"><span class="status s-warn"><span class="dot"></span>Understated — Iterable fault</span></div>
-    <div class="pct">6.37% w/c 6 Jul → 4.70% now. No projection — this is a rate, not a volume.</div>
+    <div class="pct">6.37% w/c 6 Jul → 4.01% now. No allowance, no pace, no projection.</div>
   </div>
 </div>
 
 <!-- ACTUALS -->
 <section class="sec">
-  <h2>Actuals sent this billing period <span class="tag t-act">Actual</span></h2>
-  <p class="sec-note">What has genuinely been sent and counted, 15 Aug – 27 Sep 2026 (44 days).
+  <h2>Actuals sent this contract year <span class="tag t-act">Actual</span></h2>
+  <p class="sec-note">15 Aug – 1 Oct 2026, 48 days of 365. On-pace for a 95% finish is <b>12.49%</b>.
      No estimates on this table.</p>
   <div class="card scroll">
     <table>
-      <thead><tr><th>Channel</th><th>Sent to date</th><th>Allowance</th><th>% of allowance used</th><th>Remaining</th></tr></thead>
+      <thead><tr><th>Channel</th><th>Sent to date</th><th>Allowance</th><th>% used</th><th>On-pace %</th><th>Pace</th><th>Remaining</th></tr></thead>
       <tbody>
-        <tr><td>Email</td><td>86,434,470</td><td>782,000,000</td><td>11.1%</td><td>695,565,530</td></tr>
-        <tr><td>WhatsApp — UK</td><td>87,938</td><td>1,220,000</td><td>7.2%</td><td>1,132,062</td></tr>
-        <tr><td>WhatsApp — Rest of APAC</td><td>855</td><td>280,000</td><td>0.3%</td><td>279,145</td></tr>
-        <tr><td>Push</td><td>692,523</td><td>250,000,000</td><td>0.3%</td><td>249,307,477</td></tr>
-        <tr><td>SMS</td><td>373,015</td><td>no message allowance</td><td>—</td><td>—</td></tr>
+        <tr><td>Email</td><td>100,679,379</td><td>782,000,000</td><td>12.87%</td><td>12.49%</td><td><span class="status s-good"><span class="dot"></span>1.03 on track</span></td><td>681,320,621</td></tr>
+        <tr><td>WhatsApp — UK</td><td>100,315</td><td>1,220,000</td><td>8.22%</td><td>12.49%</td><td><span class="status s-warn"><span class="dot"></span>0.66 behind</span></td><td>1,119,685</td></tr>
+        <tr><td>WhatsApp — Rest of APAC</td><td>880</td><td>280,000</td><td>0.31%</td><td>12.49%</td><td><span class="status s-crit"><span class="dot"></span>0.03 behind</span></td><td>279,120</td></tr>
+        <tr><td>Push</td><td>770,439</td><td>250,000,000</td><td>0.31%</td><td>12.49%</td><td><span class="status s-crit"><span class="dot"></span>0.02 behind</span></td><td>249,229,561</td></tr>
+        <tr><td>SMS</td><td>412,093</td><td>no message allowance</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
   <div class="callout info">
-    <h3>12% of the year gone, 11.1% of the email allowance used</h3>
-    <p>On actuals alone email is marginally ahead of pace. The concern is not what has been
-       sent — it is the <b>rate</b> of the last two weeks, which if sustained takes the year
-       past the allowance. Everything flagged below is a projection, not a debt already incurred.</p>
+    <h3>Email is the only channel anywhere near its allowance</h3>
+    <p>At 12.87% used against 12.49% on-pace it is landing just under the ceiling if the rate holds.
+       Every other term allowance is being substantially under-consumed — that is money already
+       committed, not a saving.</p>
+    <p>Part of the elapsed year ran under the August suppressions, which flatters the email pace
+       slightly. The reading is still an actual.</p>
   </div>
 </section>
 
 <!-- RAG -->
 <section class="sec">
   <h2>Status at a glance <span class="tag t-proj">Projected</span></h2>
-  <p class="sec-note">Status is set by the <b>full-year projection</b>, not by what has been sent so far.
+  <p class="sec-note">Status is set by the full-year projection.
      <b style="color:var(--critical)">Red</b> = already over ·
      <b style="color:#8a6100">Orange</b> = projected over or worth watching ·
-     <b style="color:var(--good)">Green</b> = fine.</p>
+     <b style="color:var(--good)">Green</b> = fine. Pace shown alongside so under-use is visible.</p>
   <div class="card scroll">
     <table>
-      <thead><tr><th>Channel or cost</th><th>Status</th><th class="note" style="text-align:left">Why</th></tr></thead>
+      <thead><tr><th>Channel or cost</th><th>Status</th><th>Pace</th><th class="note" style="text-align:left">Why</th></tr></thead>
       <tbody>
-        <tr>
-          <td>Email sends</td>
-          <td><span class="status s-warn"><span class="dot"></span>Projected over</span></td>
-          <td class="note">823M vs 782M on two clean weeks. ~$16,600 overage at that rate.</td>
-        </tr>
-        <tr>
-          <td>WhatsApp — UK</td>
-          <td><span class="status s-good"><span class="dot"></span>Fine</span></td>
-          <td class="note">59.8% and falling for a third week. No longer a watch item.</td>
-        </tr>
-        <tr>
-          <td>WhatsApp — Rest of APAC</td>
-          <td><span class="status s-good"><span class="dot"></span>Fine</span></td>
-          <td class="note">2.5% of allowance.</td>
-        </tr>
-        <tr>
-          <td>Push</td>
-          <td><span class="status s-good"><span class="dot"></span>Fine</span></td>
-          <td class="note">2.3% of allowance.</td>
-        </tr>
-        <tr>
-          <td>SMS</td>
-          <td><span class="status s-good"><span class="dot"></span>Fine</span></td>
-          <td class="note">3.1M projected. Fixed $1,274/month; carrier fees variable, in arrears.</td>
-        </tr>
-        <tr>
-          <td>Profiles — high-water mark</td>
-          <td><span class="status s-good"><span class="dot"></span>Fine</span></td>
-          <td class="note">34.21M of 39M — 87.7% for the 15 Aug – 14 Sep cycle. Cycle now running is not yet read.</td>
-        </tr>
-        <tr>
-          <td>Custom events</td>
-          <td><span class="status s-good"><span class="dot"></span>Fine</span></td>
-          <td class="note">26.28M of 40M — 65.7% for the same cycle.</td>
-        </tr>
-        <tr>
-          <td>Embedded messaging</td>
-          <td><span class="status s-none"><span class="dot"></span>Not tracked</span></td>
-          <td class="note">No separate figure. 39M profiles/month, $0.25 CPM — likely tracks profiles.</td>
-        </tr>
-        <tr>
-          <td>WhatsApp — PAYG North America</td>
-          <td><span class="status s-none"><span class="dot"></span>Verify</span></td>
-          <td class="note">Line sits on expired Q-14921. Confirm it is still live.</td>
-        </tr>
+        <tr><td>Email sends</td><td><span class="status s-warn"><span class="dot"></span>Projected over</span></td><td>1.03</td>
+          <td class="note">796.5M vs 782M on three clean weeks. ~$5,800 overage at that rate.</td></tr>
+        <tr><td>WhatsApp — UK</td><td><span class="status s-crit"><span class="dot"></span>Carryover expiring</span></td><td>0.66</td>
+          <td class="note">62.5% projected. 500K carryover block expires 30 Nov — see below.</td></tr>
+        <tr><td>WhatsApp — Rest of APAC</td><td><span class="status s-crit"><span class="dot"></span>Carryover expiring</span></td><td>0.03</td>
+          <td class="note">880 sent all year. 100K carryover block expires 30 Nov.</td></tr>
+        <tr><td>Push</td><td><span class="status s-warn"><span class="dot"></span>Heavily under-used</span></td><td>0.02</td>
+          <td class="note">2.3% projected against a 250M allowance. No overage risk; large unused commitment.</td></tr>
+        <tr><td>SMS</td><td><span class="status s-good"><span class="dot"></span>Fine</span></td><td>—</td>
+          <td class="note">3.1M projected. Fixed $1,274/month; carrier fees variable, in arrears.</td></tr>
+        <tr><td>Profiles — high-water mark</td><td><span class="status s-warn"><span class="dot"></span>Watch — cycle part-run</span></td><td>—</td>
+          <td class="note">88.1% at day 17 of the 15 Sep – 14 Oct cycle. A high-water mark only rises, so this is a floor with 13 days left.</td></tr>
+        <tr><td>Custom events</td><td><span class="status s-good"><span class="dot"></span>Fine</span></td><td>—</td>
+          <td class="note">65.9% at day 17 of the running cycle. 13.7M headroom.</td></tr>
+        <tr><td>Embedded messaging</td><td><span class="status s-none"><span class="dot"></span>Not tracked</span></td><td>—</td>
+          <td class="note">No separate figure. 39M profiles/cycle, $0.25 CPM — likely tracks profiles.</td></tr>
+        <tr><td>WhatsApp — PAYG North America</td><td><span class="status s-none"><span class="dot"></span>Verify</span></td><td>—</td>
+          <td class="note">Line sits on expired Q-14921. Confirm it is still live.</td></tr>
       </tbody>
     </table>
   </div>
@@ -262,69 +249,153 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
 <!-- EMAIL FORECAST -->
 <section class="sec">
   <h2>Email forecast <span class="tag t-proj">Projected</span></h2>
-  <p class="sec-note">All three figures are projections of the full contract year from 86,434,470
-     sends actually made so far. They differ only in which period sets the rate.</p>
-
+  <p class="sec-note">Three projections of the full year from 100,679,379 sends actually made.
+     They differ only in which period sets the rate.</p>
   <div class="grid g3">
     <div class="card">
-      <div class="cardhead">
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Contract-year run-rate <span class="tag t-proj">Proj</span></div>
-          <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em">717,013,217</div>
-        </div>
-      </div>
-      <div class="meter is-mute"><i style="width:91.7%"></i></div>
-      <div class="pct">91.7% of 782M</div>
+      <div class="cardhead"><div>
+        <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Contract-year run-rate <span class="tag t-proj">Proj</span></div>
+        <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em">765,582,778</div>
+      </div></div>
+      <div class="meter is-mute"><i style="width:97.9%"></i></div>
+      <div class="pct">97.9% of 782M · 2,097,487/day</div>
       <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">
-        86,434,470 sends over 44 days. Still dragged down by the suppressed weeks in the
-        window. <b>Not a planning number yet.</b>
+        Still carries the suppressed weeks, so it reads low — but the drag is washing out as
+        clean weeks accumulate.
       </p>
     </div>
-
     <div class="card">
-      <div class="cardhead">
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Trailing 12 months <span class="tag t-proj">Proj</span></div>
-          <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em">795,863,992</div>
-        </div>
-      </div>
+      <div class="cardhead"><div>
+        <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Trailing 12 months <span class="tag t-proj">Proj</span></div>
+        <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em">795,863,992</div>
+      </div></div>
       <div class="meter is-warn"><i style="width:100%"></i></div>
       <div class="pct">101.8% · 13.9M over</div>
       <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">
-        Sep 2025 – Aug 2026 actuals. Overage ≈ <b>$5,546</b>. Includes a soft spring that
-        may not repeat.
+        Sep 2025 – Aug 2026 actuals. Includes a soft spring that may not repeat.
       </p>
     </div>
-
     <div class="card">
-      <div class="cardhead">
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Two clean weeks <span class="tag t-proj">Proj</span></div>
-          <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em">823,392,680</div>
-        </div>
-        <span class="status s-warn"><span class="dot"></span>Plan against this</span>
-      </div>
+      <div class="cardhead"><div>
+        <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Three clean weeks <span class="tag t-proj">Proj</span></div>
+        <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em">796,518,539</div>
+      </div><span class="status s-warn"><span class="dot"></span>Plan against this</span></div>
       <div class="meter is-warn"><i style="width:100%"></i></div>
-      <div class="pct">105.3% · 41.4M over</div>
+      <div class="pct">101.9% · 14.5M over · 2,182,243/day</div>
       <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">
-        14–27 Sep: 2,255,870/day, both weeks within 12,000 sends of each other. Overage
-        ≈ <b>$16,557</b>.
+        w/c 14, 21 and 28 Sep. Overage ≈ <b>$5,807</b> at $0.40, or <b>$3,847</b> if bought ahead
+        at the $0.265 committed rate.
       </p>
     </div>
   </div>
+  <div class="callout">
+    <h3>Clean weeks and trailing 12 months now agree — 796M</h3>
+    <p>Two independent bases landing within 0.1% of each other is the strongest signal yet: the year
+       finishes ~14.5M over 782M unless volume changes. Break-even is 2,142,466/day; the clean-week
+       rate is 2,182,243/day, 1.9% above it.</p>
+    <p>Cumulative sends are <b>below</b> the break-even path — 100.7M against 102.8M on-track at day 48
+       — so the overage comes from the rate, not from ground already lost.</p>
+  </div>
+</section>
 
-  <div class="callout ok">
-    <h3>Last week's $61,600 warning was too pessimistic — it was built on 11 days</h3>
-    <p>The partial-window rate of 2.56M/day has settled to <b>2,255,870/day</b> across two
-       complete weeks that are almost identical (15,785,399 and 15,796,786). That annualises
-       to 823M, not 936M.</p>
-    <p>Still above the 2,142,466/day break-even, so the year does go over — but by ~41M
-       (~$16,600), not ~154M (~$61,600). The stability of the two weeks is what makes this
-       usable where last week's figure wasn't.</p>
-    <p><b>Do this:</b> plan against 823M. Two more clean weeks (to w/c 12 Oct) confirms it.
-       At ~$16,600, paying the overage in arrears is probably cheaper than the admin of
-       buying allowance — but check the CPM question in the footer first, because it decides
-       whether the rate is $0.34 or $0.40.</p>
+<!-- STEP 3C -->
+<section class="sec">
+  <h2>Allowance headroom and the top-up decision</h2>
+  <div class="callout info">
+    <p class="lede">On the clean-week rate of 2,182,243/day the 782M allowance is exhausted around
+       <b>9 August 2027</b>; notice must reach Iterable by <b>10 July 2027</b>, which is
+       <b>281 days</b> away. <b>Monitor — no action needed this week.</b></p>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Figure</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Remaining allowance</td><td>681,320,621</td></tr>
+          <tr><td>Days to exhaust at 2,182,243/day</td><td>312</td></tr>
+          <tr><td>Projected exhaustion date</td><td>9 Aug 2027</td></tr>
+          <tr><td>Notice deadline (30 days before)</td><td>10 Jul 2027</td></tr>
+          <tr><td>Days to deadline</td><td>281</td></tr>
+          <tr class="total"><td>Band</td><td><span class="status s-good"><span class="dot"></span>Monitor</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Cost of the projected 14.5M overage</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Left to bill as overage, $0.40 CPM</td><td>$5,807</td></tr>
+          <tr><td>Pre-bought at $0.265 committed CPM</td><td>$3,847</td></tr>
+          <tr class="total"><td>Saving from giving notice</td><td>$1,960</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">
+        A $1,960 saving on a decision 281 days out. Not worth acting on now; worth not forgetting.
+      </p>
+    </div>
+  </div>
+  <div class="callout crit">
+    <h3>Exhaustion lands 5 days before term end — the same shape as last year</h3>
+    <p>The 2025–26 term crossed 782M on 10 Aug 2026 with five days left and cost <b>$5,610.63</b>,
+       first known from an invoice dated 17 August. This year projects to cross on 9 Aug 2027 with
+       five days left and cost ~$5,807.</p>
+    <p>The margin is too thin to rely on. A 2% rise in send rate pulls exhaustion forward by roughly
+       three weeks and moves the notice deadline into June. <b>Re-check this section every run</b> —
+       the tripwire table below is the faster signal.</p>
+  </div>
+  <div class="card scroll" style="margin-top:14px">
+    <table>
+      <thead><tr><th>Month end</th><th>Days elapsed</th><th>On-track cumulative</th><th>Actual</th></tr></thead>
+      <tbody>
+        <tr class="here"><td>1 Oct 2026 — today</td><td>48</td><td>102,838,368</td><td>100,679,379 · below ✓</td></tr>
+        <tr><td>31 Oct 2026</td><td>78</td><td>167,112,348</td><td>—</td></tr>
+        <tr><td>30 Nov 2026</td><td>108</td><td>231,386,328</td><td>—</td></tr>
+        <tr><td>31 Dec 2026</td><td>139</td><td>297,802,774</td><td>—</td></tr>
+        <tr><td>31 Jan 2027</td><td>170</td><td>364,219,220</td><td>—</td></tr>
+        <tr><td>28 Feb 2027</td><td>198</td><td>424,208,268</td><td>—</td></tr>
+        <tr><td>31 Mar 2027</td><td>229</td><td>490,624,714</td><td>—</td></tr>
+        <tr><td>30 Apr 2027</td><td>259</td><td>554,758,694</td><td>—</td></tr>
+        <tr><td>31 May 2027</td><td>290</td><td>621,315,140</td><td>—</td></tr>
+        <tr><td>30 Jun 2027</td><td>320</td><td>685,589,120</td><td>—</td></tr>
+        <tr><td>31 Jul 2027</td><td>351</td><td>752,005,566</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <h3>Two cautions to carry</h3>
+    <p>Anything bought must sit inside the term ending <b>14 Aug 2027</b>, which does not auto-renew
+       and which Stefano has said he may not want to renew. A top-up conversation must not become an
+       early renewal conversation.</p>
+    <p><b>Confirm the $0.265 committed email rate in writing before relying on it.</b> Term 5 revises
+       the WhatsApp rates on top-up but is silent on email.</p>
+  </div>
+</section>
+
+<!-- WHATSAPP CARRYOVER -->
+<section class="sec">
+  <h2>WhatsApp carryover — expires 30 November 2026</h2>
+  <p class="sec-note">500,000 of the UK allowance and 100,000 of the APAC allowance are carried-over
+     volume from the previous term. The Q-18818 proposal deck requires them used by 30 Nov 2026, not
+     14 Aug 2027. The order form itself is silent on the earlier date.</p>
+  <div class="card scroll">
+    <table>
+      <thead><tr><th>Region</th><th>Carryover block</th><th>Sent to date <span class="tag t-act">Act</span></th><th>By 30 Nov <span class="tag t-proj">Proj</span></th><th>Shortfall <span class="tag t-proj">Proj</span></th><th>Value at committed rate</th><th>Rate needed</th></tr></thead>
+      <tbody>
+        <tr><td>WhatsApp — UK</td><td>500,000</td><td>100,315</td><td>225,709</td><td>274,291</td><td>$11,513</td><td>6,661/day vs 2,090 now</td></tr>
+        <tr><td>WhatsApp — Rest of APAC</td><td>100,000</td><td>880</td><td>1,980</td><td>98,020</td><td>$5,166</td><td>1,634/day vs 18 now</td></tr>
+        <tr class="total"><td>Total at risk</td><td>600,000</td><td>101,195</td><td>227,689</td><td>372,311</td><td>$16,679</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout crit">
+    <h3>~$16,700 of paid-for WhatsApp volume expires in 59 days</h3>
+    <p>At the current UK rate of 2,090/day the carryover block finishes ~274,000 messages short.
+       Consuming it needs 6,661/day from now — a 3.2× step up — and APAC needs 1,634/day against 18.</p>
+    <p>Valued at the <b>committed</b> rates ($41.97/1,000 UK, $52.70/1,000 APAC), not the overage
+       rates. This is money already spent, not a future cost.</p>
+    <p><b>Two routes, and both need starting this week.</b> Either plan WhatsApp volume that uses it
+       by 30 Nov, or ask Iterable in writing to extend the carryover to the term end. The order form
+       is silent on the November date, which is an argument for asking.</p>
   </div>
 </section>
 
@@ -334,19 +405,19 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
   <p class="sec-note">Dashed line = 65.2M/month, the even pace that spends 782M in a year.</p>
   <div class="card">
     <svg class="chart" id="monthly" viewBox="0 0 900 260" role="img"
-         aria-label="Monthly Iterable email sends, September 2025 to August 2026, against a 65.2 million per month allowance pace"></svg>
+         aria-label="Monthly Iterable email sends, October 2025 to September 2026, against a 65.2 million per month allowance pace"></svg>
   </div>
 </section>
 
 <!-- WEEKLY -->
 <section class="sec">
   <h2>Weekly sends and open rate <span class="tag t-act">Actual</span></h2>
-  <p class="sec-note">Iterable only, 13 complete weeks. The gap between the two open lines is
-     the machine and proxy layer.</p>
+  <p class="sec-note">Iterable only, 13 complete weeks. The gap between the two open lines is the
+     machine and proxy layer.</p>
   <div class="card">
     <div style="font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:8px">Sends per week</div>
     <svg class="chart" id="wk-sends" viewBox="0 0 900 210" role="img"
-         aria-label="Weekly Iterable email sends, end June to 27 September 2026, recovering to about 15.8 million a week"></svg>
+         aria-label="Weekly Iterable email sends, July to 1 October 2026"></svg>
   </div>
   <div class="card" style="margin-top:14px">
     <div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px">
@@ -359,50 +430,45 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
       </div>
     </div>
     <svg class="chart" id="wk-or" viewBox="0 0 900 290" role="img"
-         aria-label="Weekly open rate: all recorded opens fall from about 27 percent to about 5 percent from mid August and stay there, converging on the filtered human open rate which falls only from about 6 percent to about 4.7 percent"></svg>
+         aria-label="Weekly open rate: all recorded opens fall from about 28 percent to about 4 percent from mid August and stay there, converging on the filtered human open rate"></svg>
   </div>
   <div class="callout crit">
-    <h3>Six weeks with no machine opens recorded</h3>
-    <p>The two series have been identical since w/c 17 August — 35 machine opens last week
-       against 3.4M in early August. Nothing has been restored.</p>
-    <p>The filtered line has been flat at 4.70–5.30% for five weeks, so <b>human engagement is
-       stable</b>. What collapsed was the recording of machine and proxy opens, not opens.</p>
-    <p><b>Chase Iterable.</b> Six weeks is well past a transient fault, and the longer it runs
-       the more of the 24-month event-data window is affected. Support carries a contractual
-       P2 response of 4 business hours — worth escalating on rather than chasing.</p>
+    <h3>Seven weeks with no machine opens recorded</h3>
+    <p>35 machine opens in w/c 28 Sep against 3.4M in early August. Nothing restored. The filtered
+       line has been 4.01–5.30% for seven weeks, so human engagement is stable — what collapsed was
+       the recording.</p>
+    <p><b>Escalate on the P2 SLA.</b> Seven weeks is well past a transient fault, and the 24-month
+       event-data window means the affected period is permanently thin if it is never backfilled.</p>
   </div>
   <div class="callout">
-    <h3>Backfilling has stalled</h3>
-    <p>Only w/c 7 Sep moved this week — 733,590 to 740,711 filtered opens (+1.0%), against
-       +5.3% the week before. No earlier week was revised. The promised backdating has not
-       reached August.</p>
+    <h3>Backfilling is continuing, slowly</h3>
+    <p>Two weeks moved since last run — w/c 21 Sep filtered opens 742,782 → 762,889 (+2.7%), w/c 14 Sep
+       755,244 → 758,163 (+0.4%). August is still untouched.</p>
   </div>
 </section>
 
 <!-- PROVIDER -->
 <section class="sec">
   <h2>Open rate by mailbox provider <span class="tag t-act">Actual</span></h2>
-  <p class="sec-note">Last 8 weeks (3 Aug – 27 Sep), Iterable sends only.</p>
+  <p class="sec-note">Last 8 weeks (10 Aug – 1 Oct), Iterable sends only.</p>
   <div class="card scroll">
     <table>
-      <thead>
-        <tr><th>Provider</th><th>Sends</th><th>Share</th><th>Filtered OR</th><th>All-open OR</th><th>Bounce</th></tr>
-      </thead>
+      <thead><tr><th>Provider</th><th>Sends</th><th>Share</th><th>Filtered OR</th><th>All-open OR</th><th>Bounce</th></tr></thead>
       <tbody>
-        <tr><td>Google</td><td>78,124,046</td><td>65.6%</td><td>6.28%</td><td>9.15%</td><td>0.24%</td></tr>
-        <tr><td>Other</td><td>21,175,938</td><td>17.8%</td><td>3.06%</td><td>7.14%</td><td>0.56%</td></tr>
-        <tr><td>Microsoft</td><td>14,340,257</td><td>12.0%</td><td>3.11%</td><td>7.64%</td><td>0.34%</td></tr>
-        <tr><td>Apple</td><td>5,431,998</td><td>4.6%</td><td>0.69%</td><td>11.91%</td><td>0.84%</td></tr>
-        <tr class="total"><td>Total</td><td>119,072,239</td><td>100%</td><td>5.07%</td><td>8.73%</td><td>0.34%</td></tr>
+        <tr><td>Google</td><td>76,877,937</td><td>65.8%</td><td>6.02%</td><td>6.69%</td><td>0.23%</td></tr>
+        <tr><td>Other</td><td>20,917,876</td><td>17.9%</td><td>2.69%</td><td>3.68%</td><td>0.56%</td></tr>
+        <tr><td>Microsoft</td><td>13,601,588</td><td>11.7%</td><td>3.05%</td><td>3.93%</td><td>0.34%</td></tr>
+        <tr><td>Apple</td><td>5,351,807</td><td>4.6%</td><td>0.67%</td><td>3.42%</td><td>0.84%</td></tr>
+        <tr class="total"><td>Total</td><td>116,749,208</td><td>100%</td><td>4.83%</td><td>5.68%</td><td>0.33%</td></tr>
       </tbody>
     </table>
   </div>
   <div class="callout">
-    <h3>Provider mix stable; bounce rates flat</h3>
-    <p>Shares moved less than a point. Bounce is 0.34% overall and 0.84% at Apple, both in
-       line with previous weeks — further evidence the open-rate story is measurement, not
-       delivery. The all-open column is now dragged down by the missing machine opens, so
-       it is no longer comparable to earlier runs.</p>
+    <h3>Mix stable, bounces flat</h3>
+    <p>Shares moved less than a point. Bounce is 0.33% overall — unchanged for eight weeks, which is
+       the evidence against a deliverability cause for the open-rate fall. The all-open column is now
+       almost identical to filtered everywhere except Apple, where a small residue of MPP pre-fetch
+       still registers.</p>
   </div>
 </section>
 
@@ -417,110 +483,93 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
       <tbody>
         <tr><td>Email — base</td><td>700,000,000 sends</td><td>Whole term</td><td>$0.34</td><td>Q-09613</td></tr>
         <tr><td>Email — uplift</td><td>82,000,000 sends</td><td>Whole term</td><td>$0.40</td><td>Q-18818</td></tr>
-        <tr><td>WhatsApp — UK</td><td>1,220,000 messages</td><td>Whole term</td><td>$106.68</td><td>Q-18818</td></tr>
-        <tr><td>WhatsApp — Rest of APAC</td><td>280,000 messages</td><td>Whole term</td><td>$122.98</td><td>Q-18818</td></tr>
+        <tr><td>WhatsApp — UK</td><td>1,220,000 messages</td><td>Whole term*</td><td>$106.68</td><td>Q-18818</td></tr>
+        <tr><td>WhatsApp — Rest of APAC</td><td>280,000 messages</td><td>Whole term*</td><td>$122.98</td><td>Q-18818</td></tr>
         <tr><td>Push — mobile</td><td>250,000,000 messages</td><td>Whole term</td><td>$0.15</td><td>Q-09613</td></tr>
-        <tr><td>Profiles — daily high-water</td><td>39,000,000 profiles</td><td><b>Monthly</b></td><td>$0.92</td><td>Q-09613</td></tr>
-        <tr><td>Custom events</td><td>40,000,000 events</td><td><b>Monthly</b></td><td>$0.01</td><td>Q-09613</td></tr>
-        <tr><td>Embedded messaging</td><td>39,000,000 profiles</td><td><b>Monthly</b></td><td>$0.25</td><td>Q-09613</td></tr>
+        <tr><td>Profiles — daily high-water</td><td>39,000,000 profiles</td><td><b>Each 15th–14th cycle</b></td><td>$0.92</td><td>Q-09613</td></tr>
+        <tr><td>Custom events</td><td>40,000,000 events</td><td><b>Each 15th–14th cycle</b></td><td>$0.01</td><td>Q-09613</td></tr>
+        <tr><td>Embedded messaging</td><td>39,000,000 profiles</td><td><b>Each 15th–14th cycle</b></td><td>$0.25</td><td>Q-09613</td></tr>
         <tr><td>SMS — 3rd party intl.</td><td>None — $1,274/month fee</td><td>Monthly fee</td><td>carrier fees</td><td>Q-09613</td></tr>
         <tr><td>Dedicated IPs</td><td>6</td><td>Whole term</td><td>included</td><td>Q-09613</td></tr>
       </tbody>
     </table>
   </div>
   <div class="callout info">
-    <h3>Term and monthly allowances fail differently</h3>
-    <p><b>Email, WhatsApp and push are one pot for the year.</b> A heavy month is fine if
-       the year totals under — which is why these need a forecast, not a monthly check.</p>
-    <p><b>Profiles, custom events and embedded messaging reset monthly</b>, and profiles are
-       a <i>daily</i> high-water mark, so one day's spike sets that month's bill and a quiet
-       month can't offset it.</p>
-    <p>Everything ends <b>14 Aug 2027</b> and <b>does not auto-renew</b>. Allowance can be
-       added mid-term with 30 days' notice; it can't be reduced.</p>
+    <h3>Term, cycle and carryover all behave differently</h3>
+    <p><b>Email, WhatsApp and push are one pot for the year</b> — a heavy month is fine if the year
+       totals under, which is why they need a forecast rather than a monthly check.</p>
+    <p><b>Profiles, custom events and embedded messaging reset each 15th–14th cycle</b>, and profiles
+       are a <i>daily</i> high-water mark, so one day's spike sets that cycle's bill.</p>
+    <p>*<b>Part of the WhatsApp allowance expires early.</b> 500,000 UK and 100,000 APAC are carryover
+       from the previous term, due by 30 Nov 2026 per the Q-18818 proposal deck. Tableau cannot
+       distinguish carryover from uplift, so the table shows the single allowance line.</p>
+    <p>Everything ends <b>14 Aug 2027</b> and <b>does not auto-renew</b>. Allowance can be added
+       mid-term with 30 days' notice; it can't be reduced.</p>
   </div>
 </section>
 
-<!-- OTHER CHANNELS -->
+<!-- CHANNELS -->
 <section class="sec">
   <h2>WhatsApp, SMS and push</h2>
-  <p class="sec-note">Usage is actual; projection estimates the full year to 14 Aug 2027.</p>
+  <p class="sec-note">Contract year to date (48 days), projected to 14 Aug 2027.</p>
   <div class="card scroll">
     <table>
-      <thead>
-        <tr><th>Channel</th><th>Allowance</th><th>Sent to date <span class="tag t-act">Act</span></th><th>Full year <span class="tag t-proj">Proj</span></th><th>% of allowance <span class="tag t-proj">Proj</span></th><th>Overage CPM</th><th>Status</th></tr>
-      </thead>
+      <thead><tr><th>Channel</th><th>Allowance</th><th>Sent <span class="tag t-act">Act</span></th><th>% used <span class="tag t-act">Act</span></th><th>On-pace <span class="tag t-act">Act</span></th><th>Pace <span class="tag t-act">Act</span></th><th>Req/day for 95% <span class="tag t-act">Act</span></th><th>Full year <span class="tag t-proj">Proj</span></th><th>% <span class="tag t-proj">Proj</span></th></tr></thead>
       <tbody>
-        <tr><td>WhatsApp — UK</td><td>1,220,000</td><td>87,938</td><td>729,486</td><td>59.8%</td><td>$106.68</td>
-            <td><span class="status s-good"><span class="dot"></span>Fine</span></td></tr>
-        <tr><td>WhatsApp — Rest of APAC</td><td>280,000</td><td>855</td><td>7,093</td><td>2.5%</td><td>$122.98</td>
-            <td><span class="status s-good"><span class="dot"></span>Fine</span></td></tr>
-        <tr><td>WhatsApp — PAYG N. America</td><td>pay as you go</td><td>1</td><td>—</td><td>—</td><td>$84.00</td>
-            <td><span class="status s-none"><span class="dot"></span>Verify</span></td></tr>
-        <tr><td>Push — mobile</td><td>250,000,000</td><td>692,523</td><td>5,744,793</td><td>2.3%</td><td>$0.15</td>
-            <td><span class="status s-good"><span class="dot"></span>Fine</span></td></tr>
-        <tr><td>SMS — 3rd party intl.</td><td>None</td><td>373,015</td><td>3,094,329</td><td>—</td><td>carrier fees</td>
-            <td><span class="status s-good"><span class="dot"></span>Fine</span></td></tr>
+        <tr><td>WhatsApp — UK</td><td>1,220,000</td><td>100,315</td><td>8.22%</td><td>12.49%</td><td>0.66 behind</td><td>3,340</td><td>762,812</td><td>62.5%</td></tr>
+        <tr><td>WhatsApp — Rest of APAC</td><td>280,000</td><td>880</td><td>0.31%</td><td>12.49%</td><td>0.03 behind</td><td>836</td><td>6,692</td><td>2.4%</td></tr>
+        <tr><td>WhatsApp — PAYG N. America</td><td>pay as you go</td><td>1</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>verify</td></tr>
+        <tr><td>Push — mobile</td><td>250,000,000</td><td>770,439</td><td>0.31%</td><td>12.49%</td><td>0.02 behind</td><td>746,781</td><td>5,858,547</td><td>2.3%</td></tr>
+        <tr><td>SMS — 3rd party intl.</td><td>None</td><td>412,093</td><td>—</td><td>—</td><td>—</td><td>—</td><td>3,133,624</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="callout ok">
-    <h3>WhatsApp UK is off the watchlist</h3>
-    <p>76.5% → 69.9% → 59.8% over three weeks. Only 8,533 UK messages in the last ten days,
-       against 2,558/day at its peak. The September spike was a one-off, not a new baseline.</p>
-    <p>Email is now the only channel projected over allowance.</p>
+  <div class="callout warn">
+    <h3>What the under-use is worth</h3>
+    <p>At a 95% target, <b>WhatsApp UK</b> finishes 396,188 messages short — $16,629 of committed
+       spend unused at $41.97/1,000. <b>APAC</b> finishes 259,308 short, $13,667 at $52.70/1,000.
+       These are committed rates, not the $106.68 and $122.98 overage rates on the order form.</p>
+    <p><b>Push</b> is the largest gap in volume — 2.3% of a 250M allowance — but the order forms
+       price it at $0.00 within the subscription, so there is no recoverable committed value to put
+       on it. It is capacity, not spend.</p>
   </div>
 </section>
 
 <!-- PROFILES -->
 <section class="sec">
   <h2>Profiles and custom events <span class="tag t-act">Actual</span></h2>
-  <p class="sec-note">Billing cycle <b>15 Aug – 14 Sep 2026</b>, complete. These reset every
-     monthly cycle (15th to 14th), so each cycle is billed on its own peak and a quiet month
-     can't offset a heavy one.</p>
+  <p class="sec-note">Read for <b>15 Sep – 1 Oct 2026</b> — day 17 of the 15 Sep – 14 Oct cycle, so
+     <b>partial</b>. Both are high-water marks and can only rise before the cycle closes: treat them as
+     floors, not final. Not comparable to the completed cycle below, which covers a different window.</p>
   <div class="grid g2">
     <div class="card">
-      <div class="cardhead">
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Profiles — high-water mark</div>
-          <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">34,210,713</div>
-        </div>
-        <span class="status s-good"><span class="dot"></span>Fine</span>
-      </div>
-      <div class="meter is-good"><i style="width:87.7%"></i></div>
-      <div class="pct">87.7% of 39,000,000 · 4.79M headroom</div>
+      <div class="cardhead"><div>
+        <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Profiles — high-water mark</div>
+        <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">34,363,588</div>
+      </div><span class="status s-warn"><span class="dot"></span>Partial — 15 Sep – 1 Oct</span></div>
+      <div class="meter is-warn"><i style="width:88.11%"></i></div>
+      <div class="pct">88.11% of 39,000,000 · 4.64M headroom · 188,166 added so far this cycle</div>
       <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">
-        Peak for the completed cycle. No overage. 368,493 profiles were added across
-        15 Aug – 17 Sep, so the cycle now running will read higher.
+        13 days still to run. At the current add rate (~11,070/day) the cycle closes near 34.5M, about
+        88.5% — inside the allowance, but the headroom is 13 days of growth wide. No pace figure: this
+        resets each cycle, so year-to-date pace means nothing for it.
       </p>
     </div>
     <div class="card">
-      <div class="cardhead">
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Custom events — high-water mark</div>
-          <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">26,281,018</div>
-        </div>
-        <span class="status s-good"><span class="dot"></span>Fine</span>
-      </div>
-      <div class="meter is-good"><i style="width:65.7%"></i></div>
-      <div class="pct">65.7% of 40,000,000 · 13.7M headroom</div>
+      <div class="cardhead"><div>
+        <div style="font-size:12px;font-weight:600;color:var(--ink-2)">Custom events — high-water mark</div>
+        <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">26,341,637</div>
+      </div><span class="status s-good"><span class="dot"></span>Partial — 15 Sep – 1 Oct</span></div>
+      <div class="meter is-good"><i style="width:65.85%"></i></div>
+      <div class="pct">65.85% of 40,000,000 · 13.66M headroom</div>
       <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">
-        26,219,205 stored at cycle end. Peak sits just above stored, as a real maximum should.
-        No overage.
+        26,242,020 events stored at 1 Oct. Comfortable — no realistic path to 40M in 13 days.
       </p>
     </div>
   </div>
-  <div class="callout info">
-    <h3>Read these per monthly cycle, not contract-year-to-date</h3>
-    <p>Email, WhatsApp and push are one pot for the whole term, so they are read from 15 Aug
-       to date. <b>Profiles and custom events are not</b> — they reset on the 15th of each
-       month and each cycle is billed on its own peak.</p>
-    <p>So the usage page should be set to <b>one cycle at a time</b>: the completed cycle for
-       what was billed, and the cycle now running (15 Sep – 14 Oct) to catch a spike before
-       the invoice. A range spanning more than one cycle returns the peak across all of them,
-       which tells you nothing about what any single month cost.</p>
-    <p>Cycle 15 Aug – 14 Sep closed at 87.7% of the profile allowance and 65.7% of custom
-       events. Nothing billed above allowance.</p>
-  </div>
+  <p class="sec-note" style="margin-top:14px">Last <b>complete</b> cycle, 15 Aug – 14 Sep 2026, for
+     reference only: profiles high-water 34,210,713 (87.7%), custom events 26,281,018 (65.7%) with
+     26,219,205 stored. No overage on either.</p>
 </section>
 
 <!-- GAPS -->
@@ -528,8 +577,9 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
   <h2>Not tracked here</h2>
   <div class="card">
     <ul class="gaps">
-      <li><b>Embedded messaging</b> — 39M profiles/month, $0.25 CPM. Not broken out on the usage page; likely tracks the profile count.</li>
+      <li><b>Embedded messaging</b> — 39M profiles/cycle, $0.25 CPM. Not broken out on the usage page; likely tracks the profile count.</li>
       <li><b>Sandbox usage</b> — counts against production allowances, so every figure here understates the bill.</li>
+      <li><b>Cycle-close figures for 15 Sep – 14 Oct</b> — the readings above stop at 1 Oct. Re-read after 14 Oct for the billed peaks.</li>
     </ul>
   </div>
 </section>
@@ -539,43 +589,44 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
      (<code>db6fb249-933c-4d97-85da-4869afd5e69b</code>), filtered <code>Email Source = Iterable</code>;
      🗂️ CRM - Push-SMS-Whatsapp Reporting (<code>6a536c4f-a5b3-4f40-882d-ef85acc470c5</code>),
      filtered <code>Attribution Mode = any_7d_post_send</code>. Profiles and custom events from the
-     Iterable billing usage page, monthly cycle 15 Aug – 14 Sep 2026. Allowances from order forms Q-09613 and Q-18818.</p>
-  <p><b>Method.</b> Sends exclude send-skips (log entries, not billable sends). Rates computed
-     from summed counts, never averaged. Projection = period sends ÷ days × 365. Open rate uses
-     filtered (human) opens. All 13 weeks shown are complete.</p>
-  <p><b>Verify with Iterable.</b> (1) Whether the 700M base and 82M uplift meter as one pool —
-     it decides whether the projected ~41M overage bills at $0.34 or $0.40 CPM, a difference of
-     about $2,500. (2) Whether billing excludes send-skips. (3) Whether the WhatsApp PAYG North
-     America line survived Q-14921's expiry on 14 Aug 2026. (4) When machine-open recording will
-     be restored and whether August will be backdated.</p>
+     Iterable billing usage page, read 15 Sep – 1 Oct 2026 (partial cycle), with the completed
+     15 Aug – 14 Sep cycle shown for reference. Allowances from order forms Q-09613
+     and Q-18818; carryover deadline from the Q-18818 proposal deck, slide 2.</p>
+  <p><b>Method.</b> Sends exclude send-skips (log entries, not billable). Rates computed from summed
+     counts, never averaged. On-pace % = 0.95 × (days elapsed ÷ 365); pace = % used ÷ on-pace %.
+     Projections = period sends ÷ days × 365. Open rate uses filtered (human) opens. All 13 weeks
+     shown are complete.</p>
+  <p><b>Verify with Iterable.</b> (1) Whether the 700M base and 82M uplift meter as one pool — it
+     decides whether an overage bills at $0.34 or $0.40, and $841.59 of INV62521 turns on it.
+     (2) Whether billing excludes send-skips. (3) Whether the WhatsApp PAYG North America line
+     survived Q-14921's expiry. (4) When machine-open recording resumes and whether August is
+     backdated. (5) Whether the $0.265 committed email rate is confirmed in writing for a mid-term
+     top-up. (6) Whether the 30 Nov 2026 WhatsApp carryover deadline stands, and how Iterable tracks
+     carryover against uplift.</p>
 </footer>
 
 </div>
-
 <div class="tip" id="tip" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
-  var NS = "http://www.w3.org/2000/svg";
-  var tip = document.getElementById("tip");
-  function el(n, a, t){ var e=document.createElementNS(NS,n); for(var k in a) e.setAttribute(k,a[k]); if(t!=null) e.textContent=t; return e; }
+  var NS="http://www.w3.org/2000/svg", tip=document.getElementById("tip");
+  function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;return e;}
   function fmt(n){ return n.toLocaleString("en-GB"); }
-  function showTip(evt, html){
-    tip.innerHTML = html; tip.style.opacity = 1;
-    var x = evt.clientX + 14, y = evt.clientY + 14, r = tip.getBoundingClientRect();
-    if (x + r.width > window.innerWidth - 8) x = evt.clientX - r.width - 14;
-    if (y + r.height > window.innerHeight - 8) y = evt.clientY - r.height - 14;
-    tip.style.left = x + "px"; tip.style.top = y + "px";
+  function showTip(evt,html){
+    tip.innerHTML=html; tip.style.opacity=1;
+    var x=evt.clientX+14,y=evt.clientY+14,r=tip.getBoundingClientRect();
+    if(x+r.width>window.innerWidth-8) x=evt.clientX-r.width-14;
+    if(y+r.height>window.innerHeight-8) y=evt.clientY-r.height-14;
+    tip.style.left=x+"px"; tip.style.top=y+"px";
   }
-  function hideTip(){ tip.style.opacity = 0; }
+  function hideTip(){ tip.style.opacity=0; }
 
-  var monthly = [
-    ["Sep 25",63586744],["Oct 25",66734274],["Nov 25",60129994],["Dec 25",72238330],
-    ["Jan 26",70760904],["Feb 26",54323263],["Mar 26",62671772],["Apr 26",56653108],
-    ["May 26",68165416],["Jun 26",75452577],["Jul 26",81585112],["Aug 26",63562498]
-  ];
+  var monthly=[["Oct 25",66734274],["Nov 25",60129994],["Dec 25",72238330],["Jan 26",70760904],
+    ["Feb 26",54323263],["Mar 26",62671772],["Apr 26",56653108],["May 26",68165416],
+    ["Jun 26",75452577],["Jul 26",81585112],["Aug 26",63562498],["Sep 26",67312019]];
   (function(){
-    var svg=document.getElementById("monthly"), W=900,H=260,L=58,R=16,T=18,B=34;
+    var svg=document.getElementById("monthly"),W=900,H=260,L=58,R=16,T=18,B=34;
     var iw=W-L-R, ih=H-T-B, max=90e6, pace=65.17e6;
     var y=function(v){ return T+ih-(v/max)*ih; };
     [0,30e6,60e6,90e6].forEach(function(v){
@@ -584,7 +635,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
     });
     var bw=iw/monthly.length, pad=bw*0.22;
     monthly.forEach(function(d,i){
-      var x=L+i*bw+pad/2, w=bw-pad;
+      var x=L+i*bw+pad/2,w=bw-pad;
       var rect=el("rect",{x:x,y:y(d[1]),width:w,height:ih-(y(d[1])-T),rx:4,class:"bar"});
       rect.addEventListener("mousemove",function(e){
         showTip(e,"<b>"+d[0]+"</b>"+fmt(d[1])+" sends<br>"+(d[1]/pace*100).toFixed(0)+"% of even monthly pace");
@@ -598,28 +649,28 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
     svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(0),y2:y(0),class:"baseline"}));
   })();
 
-  var weeks = [
-    ["29 Jun",17611069,1089949,4751749],["6 Jul",19520707,1242585,5442814],["13 Jul",17085788,1087058,4622148],
-    ["20 Jul",19412140,1151544,5202732],["27 Jul",16695209,1006476,4492890],["3 Aug",16567940,991272,4362680],
-    ["10 Aug",16277491,838843,1826091],["17 Aug",16159055,762924,762995],["24 Aug",11671501,536058,536093],
-    ["31 Aug",12700552,672621,672922],["7 Sep",14113515,740711,741135],["14 Sep",15785399,755244,755640],
-    ["21 Sep",15796786,742782,742817]
-  ];
+  var weeks=[["6 Jul",19520707,1242585,5442814],["13 Jul",17085788,1087058,4622148],
+    ["20 Jul",19412140,1151544,5202732],["27 Jul",16695209,1006476,4492890],
+    ["3 Aug",16567940,991272,4362680],["10 Aug",16277491,838843,1826091],
+    ["17 Aug",16159055,762924,762995],["24 Aug",11671501,536058,536093],
+    ["31 Aug",12700552,672621,672922],["7 Sep",14113515,740711,741135],
+    ["14 Sep",15785399,758163,758560],["21 Sep",15796786,762889,762934],
+    ["28 Sep",14244909,570723,570758]];
 
   (function(){
-    var svg=document.getElementById("wk-sends"), W=900,H=210,L=52,R=14,T=14,B=38;
+    var svg=document.getElementById("wk-sends"),W=900,H=210,L=52,R=14,T=14,B=38;
     var iw=W-L-R, ih=H-T-B, max=22e6;
     var y=function(v){ return T+ih-(v/max)*ih; };
     [0,10e6,20e6].forEach(function(v){
       svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),class:"gridline"}));
       svg.appendChild(el("text",{x:L-7,y:y(v)+3.5,class:"tick","text-anchor":"end"},(v/1e6)+"M"));
     });
-    var bw=iw/weeks.length, pad=bw*0.26;
+    var bw=iw/weeks.length,pad=bw*0.26;
     weeks.forEach(function(d,i){
-      var x=L+i*bw+pad/2, w=bw-pad;
+      var x=L+i*bw+pad/2,w=bw-pad;
       var rect=el("rect",{x:x,y:y(d[1]),width:w,height:ih-(y(d[1])-T),rx:3,class:"bar"});
       rect.addEventListener("mousemove",function(e){
-        showTip(e,"<b>w/c "+d[0]+"</b>"+fmt(d[1])+" sends<br>"+(d[1]/7).toLocaleString("en-GB",{maximumFractionDigits:0})+"/day");
+        showTip(e,"<b>w/c "+d[0]+"</b>"+fmt(d[1])+" sends<br>"+Math.round(d[1]/7).toLocaleString("en-GB")+"/day");
       });
       rect.addEventListener("mouseleave",hideTip);
       svg.appendChild(rect);
@@ -629,7 +680,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
   })();
 
   (function(){
-    var svg=document.getElementById("wk-or"), W=900,H=290,L=52,R=14,T=18,B=40;
+    var svg=document.getElementById("wk-or"),W=900,H=290,L=52,R=14,T=18,B=40;
     var iw=W-L-R, ih=H-T-B, max=0.30;
     var y=function(v){ return T+ih-(v/max)*ih; };
     var x=function(i){ return L+(iw/(weeks.length-1))*i; };
@@ -637,23 +688,22 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
       svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),class:"gridline"}));
       svg.appendChild(el("text",{x:L-7,y:y(v)+3.5,class:"tick","text-anchor":"end"},(v*100).toFixed(0)+"%"));
     });
-    var top=weeks.map(function(d,i){ return [x(i),y(d[3]/d[1])]; });
-    var bot=weeks.map(function(d,i){ return [x(i),y(d[2]/d[1])]; });
+    var top=weeks.map(function(d,i){return [x(i),y(d[3]/d[1])];});
+    var bot=weeks.map(function(d,i){return [x(i),y(d[2]/d[1])];});
     svg.appendChild(el("path",{d:"M"+top.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join("L")
       +"L"+bot.slice().reverse().map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join("L")+"Z",
       fill:"#eb6834","fill-opacity":"0.10",stroke:"none"}));
-
     function series(key,color){
-      var pts=weeks.map(function(d,i){ return [x(i),y(d[key]/d[1]),d]; });
+      var pts=weeks.map(function(d,i){return [x(i),y(d[key]/d[1]),d];});
       svg.appendChild(el("path",{d:"M"+pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join("L"),
         fill:"none",stroke:color,"stroke-width":2,"stroke-linejoin":"round","stroke-linecap":"round"}));
       pts.forEach(function(p){
         svg.appendChild(el("circle",{cx:p[0],cy:p[1],r:4,fill:color,stroke:"var(--surface)","stroke-width":2}));
         var hit=el("circle",{cx:p[0],cy:p[1],r:14,fill:"transparent"});
         hit.addEventListener("mousemove",function(e){
-          var d=p[2], m=d[3]-d[2];
-          showTip(e,"<b>w/c "+d[0]+"</b>All opens "+(d[3]/d[1]*100).toFixed(2)+"%<br>Filtered "+(d[2]/d[1]*100).toFixed(2)
-            +"%<br>Machine/proxy "+fmt(m)+(m>1000?" ("+(d[3]/d[2]).toFixed(2)+"× filtered)":" — collapsed"));
+          var d=p[2],m=d[3]-d[2];
+          showTip(e,"<b>w/c "+d[0]+"</b>All opens "+(d[3]/d[1]*100).toFixed(2)+"%<br>Filtered "
+            +(d[2]/d[1]*100).toFixed(2)+"%<br>Machine/proxy "+fmt(m)+(m>1000?" ("+(d[3]/d[2]).toFixed(2)+"× filtered)":" — collapsed"));
         });
         hit.addEventListener("mouseleave",hideTip);
         svg.appendChild(hit);
@@ -662,7 +712,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
     series(3,"#eb6834"); series(2,"#2a78d6");
     svg.appendChild(el("text",{x:x(0)+6,y:y(weeks[0][3]/weeks[0][1])-9,fill:"#eb6834","font-size":"11","font-weight":"700"},"All opens"));
     svg.appendChild(el("text",{x:x(0)+6,y:y(weeks[0][2]/weeks[0][1])-9,fill:"#2a78d6","font-size":"11","font-weight":"700"},"Filtered (human)"));
-    var bx=x(7);
+    var bx=x(6);
     svg.appendChild(el("line",{x1:bx,x2:bx,y1:T,y2:T+ih,stroke:"#898781","stroke-width":1,"stroke-dasharray":"3 3"}));
     svg.appendChild(el("text",{x:bx+6,y:T+12,fill:"#898781","font-size":"10","font-weight":"700"},"17 Aug — machine opens stop"));
     weeks.forEach(function(d,i){ svg.appendChild(el("text",{x:x(i),y:H-B+16,class:"tick","text-anchor":"middle"},d[0])); });
